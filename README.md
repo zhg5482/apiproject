@@ -16,3 +16,6 @@
 # models 配置
     models/models.go
     参考文档:https://blog.csdn.net/boss2967/article/details/82792076
+# redis 连接池
+    lib/refisCache.go
+# 项目相关配置 app.conf
