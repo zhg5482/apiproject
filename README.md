@@ -13,3 +13,6 @@
     启动 ./main.go
     自动编译启动 bee run (修改后自动生效)
     参考文档 ： https://blog.csdn.net/loongshawn/article/details/54114606
+# models 配置
+    models/models.go
+    参考文档:https://blog.csdn.net/boss2967/article/details/82792076

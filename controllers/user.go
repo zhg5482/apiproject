@@ -96,8 +96,10 @@ func (u *UserController) Post() {
 // @router /:uid [put]
 func (u *UserController) Put() {
 	uid := u.GetString(":uid")
-	if uid != "" {
-		var user models.User
+	username := u.GetString("username")
+	if uid != ""  && username!= ""{
+		uid,err := strconv.Atoi(uid)
+		user := models.User{Id:uid,Name:username}
 		json.Unmarshal(u.Ctx.Input.RequestBody, &user)
 		uu, err := services.UpdateUser(orm.NewOrm(),user)
 		if err != nil {
@@ -118,13 +120,13 @@ func (u *UserController) Put() {
 // @router /login [get]
 func (u *UserController) Login() {
 	username := u.GetString("username")
-	password := u.GetString("password")
-	//if models.Login(orm.NewOrm(),username, password) {
-	user,err := services.Login(orm.NewOrm(),username,password)
-	if err != nil {
-		u.Data["json"] = "login success"
-	} else {
-		u.Data["json"] = user
+	fmt.Println(username,"Login=====",u.Ctx.Request)
+	u.Data["json"] = "login failed!"
+	if username != ""{
+		user,err := services.Login(orm.NewOrm(),username)
+		if err == nil {
+			u.Data["json"] = user
+		}
 	}
 	u.ServeJSON()
 }

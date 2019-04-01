@@ -3,7 +3,7 @@ package models
 import "github.com/astaxie/beego/orm"
 
 func init()  {
-	// 需要在init中注册定义的model
+	//注册model
 	orm.RegisterModel(new(User), new(Post), new(Profile), new(Tag))
 }
 

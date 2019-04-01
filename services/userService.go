@@ -6,10 +6,10 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-func Login(o orm.Ormer,username, password string)(models.User,error){
+func Login(o orm.Ormer,username string)(models.User,error){
 	var user models.User
-	var sql = "select * from user where username = ? and password = "
-	err := o.Raw(sql,username,password).QueryRow(&user)
+	var sql = "select * from user where name = ? limit 1"
+	err := o.Raw(sql,username).QueryRow(&user)
 	fmt.Printf("ERR: %v\n", err)
 	return user,err
 }
@@ -42,5 +42,5 @@ func GetUserByQuery(o orm.Ormer,sql string,paras [] interface{})([] models.User,
 }
 
 func UpdateUser(o orm.Ormer,user models.User) (int64,error) {
-	return o.Update(&user,"user_name")
+	return o.Update(&user,"Name")
 }

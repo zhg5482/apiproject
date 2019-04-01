@@ -16,10 +16,6 @@ func init()  {
 	orm.SetMaxIdleConns("default",1000)
 	orm.SetMaxOpenConns("default",2000)
 	orm.DefaultTimeLoc = time.Local
-	//注册model
-	//orm.RegisterModel(new(models.User),new(models.Profile),new(models.Post),new(models.Tag))
-	//初始化ormer
-	//O = orm.NewOrm()
 	//自动化建表
 	//orm.RunSyncdb("default", false, true)
 	//初始化数据
