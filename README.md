@@ -10,5 +10,6 @@
 #创建项目
     bee api apiproject
 #启动项目
-    启动main.go
+    启动 ./main.go
+    自动编译启动 bee run (修改后自动生效)
     参考文档 ： https://blog.csdn.net/loongshawn/article/details/54114606
