@@ -60,28 +60,26 @@ func (u *UserController) Get() {
 func (u *UserController) Post() {
 	userName := u.Input().Get("username")
 	age := u.GetString("age")
-	if userName != ""{
+	u.Data["json"] = "insert failed!"
+	if age != "" && userName != "" {
 		db := orm.NewOrm()
 		err := db.Begin()   //开启事务
 		//插入子表
-
-		age ,err:=strconv.Atoi(age)
+		age,err:=strconv.Atoi(age)
 		profile := models.Profile{Age:age}
-		id,err := db.Insert(&profile)
+		id,err := services.AddProfile(db,profile)
 		if err != nil {
 			db.Rollback()
-		}else{
-			fmt.Println("success insert profile")
 		}
-		userName := u.Input().Get("username")
+		//插入父表
 		user := models.User{Name:userName,Profile:&models.Profile{Id:int(id)}}
-		_,err1 := db.Insert(&user)
+		//_,err1 := db.Insert(&user) //全局insert
+		_,err1 := services.AddUser(db,user)
 		if err1 != nil {
 			db.Rollback()
 		} else {
-			fmt.Println("success insert user")
+			u.Data["json"] = "insert success!"
 		}
-
 		err = db.Commit()
 	}
 	u.ServeJSON()
