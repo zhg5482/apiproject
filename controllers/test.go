@@ -4,7 +4,6 @@ import (
 	"apiproject/lib"
 	"fmt"
 	"github.com/astaxie/beego"
-	"time"
 )
 
 //切换数据库
@@ -15,7 +14,8 @@ func ChangeDb()  {
 
 //redis 测试
 func RedisTest()  {
-	res := lib.RedisSet("egew","rtr",10*time.Second)
+	//res := lib.RedisSet("ergeergew","rtr",10)
+	res,_ := lib.RedisGet("cl")
 	fmt.Println(res,"===========")
 
 	//fmt.Println("========",value)

@@ -43,11 +43,10 @@ func RedisGet(key string) (string,error){
 	// 从池里获取连接
 	rc := RedisClient.Get()
 	//====================
-	val,err :=  rc.Do("GET", key)
+	res,err :=  redis.String(rc.Do("GET", key))
 	if err != nil{
 		fmt.Println("redis get key->value failed!")
 	}
-	res := string(val.([]byte))
 	//====================
 	// 用完后将连接放回连接池
 	defer rc.Close()
@@ -55,28 +54,18 @@ func RedisGet(key string) (string,error){
 }
 
 //set key val expire
-func RedisSet(key string,val string,expire time.Duration) bool {
+func RedisSet(key string,val string,expire int) bool {
 	// 从池里获取连接
 	rc := RedisClient.Get()
 	//====================
 	flag := true
-	n,err := rc.Do("set", key, val)
+	// rc.Do("SET", key, val)  永不过期
+	// rc.Do("SET", key, val, "PX", expire)  毫秒级
+	_, err := rc.Do("SET", key, val, "EX", expire)
 	if err != nil {
 		fmt.Println("redis set key->value failed!",err.Error())
 		flag = false
-	}else{
-		if n == int64(1) {	//设置过期时间
-			n,_ := rc.Do("EXPIRE", key, expire)
-			if n == int64(1) {
-				flag = true
-				fmt.Println("redis set key->value success!")
-			}
-		}else if n == int64(0) {
-			fmt.Println("redis set key->value has already existed!",err.Error())
-			flag = false
-		}
 	}
-	//====================
 	// 用完后将连接放回连接池
 	defer rc.Close()
 	return flag

@@ -23,7 +23,7 @@
     
 ## redis 连接池
     lib/refisCache.go
-    
+    参考 ：https://www.cnblogs.com/mafeng/p/6322957.html
 # 项目相关配置 app.conf
 # nginx 配置 golang.conf
     

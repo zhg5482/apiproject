@@ -1,6 +1,7 @@
 package main
 
 import (
+	"apiproject/controllers"
 	_ "apiproject/routers"             //路由
 	"github.com/astaxie/beego"         //框架
 	"github.com/astaxie/beego/orm"     //orm
@@ -18,6 +19,7 @@ func init()  {
 	//orm.DefaultTimeLoc = time.Local //时区设置
 	//自动化建表
 	//orm.RunSyncdb("default", false, true)
+	controllers.RedisTest()
 
 }
 
