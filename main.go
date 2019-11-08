@@ -1,7 +1,6 @@
 package main
 
 import (
-	"apiproject/controllers"
 	_ "apiproject/routers"             //路由
 	"github.com/astaxie/beego"         //框架
 	"github.com/astaxie/beego/orm"     //orm
@@ -19,14 +18,14 @@ func init()  {
 	//orm.DefaultTimeLoc = time.Local //时区设置
 	//自动化建表
 	//orm.RunSyncdb("default", false, true)
-	controllers.RedisTest()
-
+	//controllers.RedisTest()
 }
 
 func main() {
 	if beego.BConfig.RunMode == "dev" {
-		beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+		beego.SetStaticPath("/swagger", "swagger")
+		//beego.BConfig.WebConfig.DirectoryIndex = true
+		//beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 	beego.Run()
 }
