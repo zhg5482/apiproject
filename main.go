@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "apiproject/routers"     //路由
+	_ "apiproject/routers" //路由
 	"encoding/json"
 	"fmt"
 	"github.com/astaxie/beego" //框架
