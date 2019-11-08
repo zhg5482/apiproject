@@ -34,7 +34,7 @@ func main() {
 	beego.Run()
 }
 
-// logs
+// 初始化 logs
 func initLogger()(err error) {
 	config := make(map[string]interface{})
 	config["filename"] = beego.AppConfig.String("log_path")
