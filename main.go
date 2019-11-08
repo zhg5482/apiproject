@@ -5,7 +5,7 @@ import (
 	_ "apiproject/routers"             //路由
 	"github.com/astaxie/beego"         //框架
 	"github.com/astaxie/beego/orm"     //orm
-	_ "github.com/go-sql-driver/mysql" //mssql
+	_ "github.com/go-sql-driver/mysql" //mysql
 )
 
 func init()  {

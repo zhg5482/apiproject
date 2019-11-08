@@ -8,6 +8,7 @@
     cd $GOLANG/src
     go get github.com/beego/bee
     参考文档 ： https://www.cnblogs.com/zuxingyu/p/6016816.html
+    https://www.cnblogs.com/xiaochuizi/p/9257521.html
     
 ## 创建项目
     bee api apiproject
@@ -26,4 +27,5 @@
     参考 ：https://www.cnblogs.com/mafeng/p/6322957.html
 # 项目相关配置 app.conf
 # nginx 配置 golang.conf
+
     
