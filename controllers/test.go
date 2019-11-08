@@ -15,7 +15,7 @@ func ChangeDb()  {
 //redis 测试
 func RedisTest()  {
 	//res := lib.RedisSet("ergeergew","rtr",10)
-	res,_ := lib.RedisGet("cl")
+	res,_ := lib.RedisGet("00d716905c8ed414aa0103ba17815795")
 	fmt.Println(res,"===========")
 
 	//fmt.Println("========",value)

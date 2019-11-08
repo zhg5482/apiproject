@@ -1,8 +1,11 @@
 package main
 
 import (
-	_ "apiproject/routers"             //路由
-	"github.com/astaxie/beego"         //框架
+	_ "apiproject/routers"     //路由
+	"encoding/json"
+	"fmt"
+	"github.com/astaxie/beego" //框架
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"     //orm
 	_ "github.com/go-sql-driver/mysql" //mysql
 )
@@ -19,6 +22,7 @@ func init()  {
 	//自动化建表
 	//orm.RunSyncdb("default", false, true)
 	//controllers.RedisTest()
+	initLogger()
 }
 
 func main() {
@@ -28,4 +32,23 @@ func main() {
 		//beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 	beego.Run()
+}
+
+// logs
+func initLogger()(err error) {
+	config := make(map[string]interface{})
+	config["filename"] = beego.AppConfig.String("log_path")
+
+	// map 转 json
+	configStr, err := json.Marshal(config)
+	if err != nil {
+		fmt.Println("initLogger failed, marshal err:", err)
+		return
+	}
+	// log 的配置
+	beego.SetLogger(logs.AdapterFile, string(configStr))
+	// log打印文件名和行数
+	beego.SetLogFuncCall(true)
+	fmt.Println(string(configStr))
+	return
 }

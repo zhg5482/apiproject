@@ -26,10 +26,14 @@
 ## redis 连接池
     lib/refisCache.go
     参考 ：https://www.cnblogs.com/mafeng/p/6322957.html
+    https://www.cnblogs.com/tianwenxue/p/10083509.html
 # 项目相关配置 app.conf
 # nginx 配置 golang.conf
 
 # swagger 文档
     http://aip.golang.com/swagger/index.html
+    
+# logger
+    https://www.jianshu.com/p/bd29ba202be0
 
     

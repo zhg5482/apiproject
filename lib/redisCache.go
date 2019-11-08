@@ -13,6 +13,7 @@ var (
 	RedisClient *redis.Pool
 	REDIS_HOST string
 	REDIS_DB int
+	PASSWORD string
 )
 
 //初始化连接池
@@ -20,6 +21,7 @@ func init()  {
 	//从配置文件获取redis的ip和db
 	REDIS_HOST = beego.AppConfig.String("redis.host")
 	REDIS_DB, _ = beego.AppConfig.Int("redis.db")
+	PASSWORD = beego.AppConfig.String("redis.password")
 	// 建立连接池
 	RedisClient = &redis.Pool{
 		// 从配置文件获取maxidle以及maxactive，取不到则用后面的默认值
@@ -30,6 +32,12 @@ func init()  {
 			c, err := redis.Dial("tcp",REDIS_HOST)
 			if err != nil {
 				return nil, err
+			}
+			if PASSWORD != "" {
+				if _, err = c.Do("AUTH", PASSWORD); err != nil {
+					c.Close()
+					return nil, err
+				}
 			}
 			// 选择db
 			c.Do("SELECT", REDIS_DB)
